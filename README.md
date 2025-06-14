@@ -76,7 +76,7 @@ I'm a frontend craftsman with a secret weapon: a deep data science background. W
 
 ### What I Can Help You With
 
-- **Frontend Craftsmanship**: React, Vue.js, Next.js applications with obsessive attention to detail
+- **Frontend Craftsmanship**: React, Next.js applications with obsessive attention to detail
 - **Data Visualization**: Interactive dashboards and charts that make complex data beautiful and understandable
 - **UI/UX Design**: Pixel-perfect interfaces with smooth animations and micro-interactions
 - **Performance Optimization**: Lightning-fast websites with buttery smooth user experiences
@@ -100,7 +100,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **[Data Analytics Portfolio](https://siino-z.github.io/) • [LinkedIn](https://linkedin.com/in/sino-z) • [Twitter](https://twitter.com/your-handle) • [Email](mailto:sinothaboz@gmail.com)**
 
-⭐️ From [Sino](https://github.com/siino-z) - *"Design with purpose, code with passion"*
+From [Sino](https://github.com/siino-z) - *"Design with purpose, code with passion"*
 
 </div>
 
