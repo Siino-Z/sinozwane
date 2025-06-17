@@ -86,15 +86,6 @@ export default function ProjectsSection() {
           </div>
         </section>
       ))}
-      <div className="profile-image-container">
-        <Image
-          src="/path/to/profile.jpg"
-          alt="Profile"
-          className="profile-image"
-          width={150}
-          height={150}
-        />
-      </div>
     </section>
   );
 }
