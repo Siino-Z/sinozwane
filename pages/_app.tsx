@@ -1,7 +1,12 @@
-import '../styles/SkillsConstellation.scss'; // Import global SCSS
-
+import '../styles/SkillsConstellation.scss'; // your global styles
+import { Analytics } from "@vercel/analytics/next";
 import type { AppProps } from 'next/app';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
 }
