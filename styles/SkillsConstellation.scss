@@ -1,0 +1,308 @@
+// Variables
+$primary-bg: #040810;
+$container-height: 500px;
+$orb-size: 64px;
+$transition-duration: 0.5s;
+$fast-transition: 0.3s;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin gradient-text($from, $via, $to) {
+  background: linear-gradient(to right, $from, $via, $to);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+// Keyframes
+@keyframes gentle-float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+@keyframes pulse-animation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-dashed {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes particle-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+// Main component
+.skills-constellation {
+  min-height: 100vh;
+  background: $primary-bg;
+  @include flex-center;
+
+  &__section {
+    width: 100%;
+    max-width: 1152px; // max-w-6xl equivalent
+    padding: 4rem 1rem;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  &__title {
+    font-size: clamp(1.25rem, 5vw, 2.5rem); // reduced from clamp(1.5rem, 8vw, .75rem)
+    font-weight: 700;
+    margin-bottom: 1rem;
+    @include gradient-text(#6366f1, #60a5fa, #38bdf8);
+    
+    @media (min-width: 768px) {
+      font-size: clamp(1.7rem, 5vw, 2.5rem); // reduced from clamp(3.75rem, 10vw, 6rem)
+    }
+  }
+
+  &__subtitle {
+    color: #9ca3af;
+    font-size: 1.125rem;
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    height: $container-height;
+    background: linear-gradient(135deg, #040810, rgba(30, 58, 138, 0.1));
+    border-radius: 1.5rem;
+    border: 1px solid rgba(55, 65, 81, 0.3);
+    overflow: hidden;
+  }
+
+  &__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__skill {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    transition: all $transition-duration ease;
+
+    &--highlighted {
+      z-index: 20;
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+  }
+
+  &__orb {
+    width: $orb-size;
+    height: $orb-size;
+    border-radius: 50%;
+    @include flex-center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+    position: relative;
+    transition: all $transition-duration ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+
+    &--highlighted {
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__orb-text {
+    position: relative;
+    z-index: 10;
+  }
+
+  &__pulse-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: pulse-animation 1s infinite;
+  }
+
+  &__label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0.75rem;
+    opacity: 0;
+    transform: translateX(-50%) translateY(0.5rem);
+    transition: all $fast-transition ease;
+    pointer-events: none;
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  &__label-content {
+    padding: 0.5rem 1rem;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(55, 65, 81, 0.5);
+    text-align: center;
+    position: relative;
+  }
+
+  &__label-name {
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  &__label-category {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  &__label-arrow {
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 0.5rem;
+    height: 0.5rem;
+    background: rgba(17, 24, 39, 0.95);
+    border-left: 1px solid rgba(55, 65, 81, 0.5);
+    border-top: 1px solid rgba(55, 65, 81, 0.5);
+  }
+
+  &__connection-indicator {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px dashed;
+    opacity: 0.6;
+    animation: spin-dashed 3s linear infinite;
+  }
+
+  &__floating-elements {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  &__floating-particle {
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: rgba(147, 197, 253, 0.3);
+    border-radius: 50%;
+    animation: particle-pulse 2s ease-in-out infinite;
+  }
+
+  &__categories {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  &__category {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    background: rgba(31, 41, 55, 0.4);
+    color: #d1d5db;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all $fast-transition ease;
+
+    &:hover {
+      background: rgba(55, 65, 81, 0.4);
+    }
+
+    &--hovered {
+      background: rgba(37, 99, 235, 0.2);
+      border-color: rgba(96, 165, 250, 0.5);
+      color: #93c5fd;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    }
+  }
+
+  &__category-icon {
+    margin-right: 0.5rem;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .skills-constellation {
+    &__section {
+      padding: 2rem 1rem;
+    }
+
+    &__container {
+      height: 400px;
+    }
+
+    &__orb {
+      width: 48px;
+      height: 48px;
+      font-size: 0.75rem;
+    }
+
+    &__skill--highlighted {
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-constellation {
+    &__categories {
+      gap: 0.5rem;
+    }
+
+    &__category {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.75rem;
+    }
+  }
+}

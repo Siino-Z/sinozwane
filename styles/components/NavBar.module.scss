@@ -1,0 +1,438 @@
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes radialExpand {
+  from {
+    opacity: 0;
+    /* Only scale, do not set translate or rotate */
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.2;
+  }
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes lineGrow {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100px; // Reduced from 120px
+    opacity: 0.3;
+  }
+}
+
+// Backdrop
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(4, 8, 16, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 98;
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Main navbar
+.navbar {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 90%;
+  max-width: 500px;
+  
+  background: rgba(4, 8, 16, 0.441);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  
+  box-shadow: 
+    0 8px 32px rgba(4, 8, 16, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  animation: slideInFromTop 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.scrolled {
+    top: 1rem;
+    background: rgba(4, 8, 16, 0.98);
+    box-shadow: 
+      0 12px 40px rgba(4, 8, 16, 0.6),
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+// Logo
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoText {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.logoDot {
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.8);
+  }
+}
+
+// Menu container
+.menuContainer {
+  position: relative;
+}
+
+// Menu trigger
+.menuTrigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 102; // Ensure trigger is above everything
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    
+    .triggerDot {
+      background: #60a5fa;
+      box-shadow: 0 0 8px rgba(96, 165, 250, 0.6);
+    }
+  }
+
+  &.active {
+    .triggerDot {
+      background: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+      
+      &:nth-child(1) {
+        transform: scale(1.2);
+      }
+      
+      &:nth-child(2) {
+        transform: scale(0.8);
+      }
+      
+      &:nth-child(3) {
+        transform: scale(1.4);
+      }
+    }
+  }
+}
+
+.triggerIcon {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.triggerDot {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Radial menu - FIXED CONTAINER
+.radialMenu {
+  position: absolute;
+  top: calc(50% + 85px);   // Move down
+  left: calc(50% + 70px);  // Move right
+  transform: translate(-50%, -50%);
+  width: 300px; // Reduced from 400px
+  height: 300px; // Reduced from 400px
+  pointer-events: none; // Container doesn't intercept clicks
+  z-index: 101;
+}
+
+// Center pulse effect
+.centerPulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.6) 0%, rgba(59, 130, 246, 0.2) 70%, transparent 100%);
+  border-radius: 50%;
+  animation: pulseGlow 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+// Menu item wrapper - FIXED POSITIONING
+.menuItemWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  /* REMOVE opacity: 0; */
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  pointer-events: auto;
+  z-index: 102;
+}
+
+// Connection lines
+.connectionLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(96, 165, 250, 0.4) 0%,
+    rgba(96, 165, 250, 0.1) 50%,
+    transparent 100%
+  );
+  transform-origin: left center;
+  animation: lineGrow 0.8s ease-out 0.3s both;
+  pointer-events: none; // Lines don't intercept clicks
+  z-index: 100;
+}
+
+// Menu items - FIXED CLICKABILITY
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px; // Slightly smaller to prevent overlap
+  height: 36px; // Slightly smaller
+  background: rgba(4, 8, 16, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px; // Adjusted for new height
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.85rem; // Slightly smaller
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  cursor: pointer; // Ensure cursor shows it's clickable
+  pointer-events: auto; // Explicitly allow clicks
+  z-index: 103; // Above everything else
+  
+  box-shadow: 
+    0 4px 12px rgba(4, 8, 16, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  &:hover {
+    background: rgba(4, 8, 16, 0.98);
+    border-color: rgba(96, 165, 250, 0.4);
+    transform: scale(1.05); // Reduced hover scale to prevent overlap
+    box-shadow: 
+      0 8px 25px rgba(4, 8, 16, 0.6),
+      0 0 20px rgba(96, 165, 250, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    .itemText {
+      color: #60a5fa;
+      text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+    }
+    
+    .itemGlow {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  &:active {
+    transform: scale(1.02); // Reduced active scale
+  }
+}
+
+.itemText {
+  position: relative;
+  z-index: 104; // Text above glow
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none; // Text doesn't intercept clicks
+}
+
+.itemGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 120px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse,
+    rgba(96, 165, 250, 0.1) 0%,
+    rgba(59, 130, 246, 0.05) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 101;
+  pointer-events: none; // Glow doesn't intercept clicks
+}
+
+// Orbital rings - FIXED Z-INDEX
+.orbitalRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--ring-size);
+  height: var(--ring-size);
+  border: 1px solid rgba(96, 165, 250, 0.1);
+  border-radius: 50%;
+  animation: orbitSpin 20s linear infinite;
+  pointer-events: none; // Rings don't intercept clicks
+  z-index: 99; // Below menu items
+  
+  &:nth-child(n+2) {
+    animation-direction: reverse;
+    animation-duration: 30s;
+    border-color: rgba(59, 130, 246, 0.08);
+  }
+}
+
+// Responsive design - UPDATED
+@media (max-width: 768px) {
+  .navbar {
+    width: 95%;
+  }
+  
+  .navContent {
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .logoText {
+    font-size: 1.2rem;
+  }
+  
+  .radialMenu {
+    width: 240px; // Smaller for mobile
+    height: 240px;
+  }
+  
+  .menuItem {
+    width: 75px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .radialMenu {
+    width: 200px; // Even smaller for very small screens
+    height: 200px;
+  }
+  
+  .menuItem {
+    width: 65px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+}
+
+.orbitWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  animation: orbitSpin 6s linear infinite;
+  /* Each child will get a unique class for its plane/radius */
+}
+
+.orbitWrapper.planet0 { 
+  /* Closest orbit, no tilt */
+  .menuItem { transform: rotateY(0deg) translateY(-80px); }
+}
+.orbitWrapper.planet1 { 
+  /* Slight tilt */
+  .menuItem { transform: rotateY(20deg) translateY(-110px); }
+}
+.orbitWrapper.planet2 { 
+  /* More tilt, further out */
+  .menuItem { transform: rotateY(-20deg) translateY(-140px); }
+}
+.orbitWrapper.planet3 { 
+  .menuItem { transform: rotateX(15deg) translateY(-170px); }
+}
+.orbitWrapper.planet4 { 
+  .menuItem { transform: rotateX(-15deg) translateY(-200px); }
+}
+
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Pause all orbits when parent has .paused */
+.radialMenu.paused .orbitWrapper {
+  animation-play-state: paused;
+}

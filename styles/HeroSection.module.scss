@@ -1,0 +1,122 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  background: #040810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.content {
+  z-index: 1;
+  color: #e2e8f0;
+  max-width: 640px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.gradientWord {
+  background: linear-gradient(90deg, #6366f1, #38bdf8, #60a5fa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 25% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.ctaWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cta {
+  position: relative;
+  color: #60a5fa;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+.underline {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: #60a5fa;
+  transition: width 0.3s ease;
+}
+
+.cta:hover .underline {
+  width: 100%;
+}
+
+.orb {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: #6366f1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transition: transform 0.3s ease;
+  z-index: 2;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.orbInner {
+  width: 24px;
+  height: 24px;
+  background: #e2e8f0;
+  border-radius: 50%;
+}
+
+.orbMenu {
+  position: absolute;
+  bottom: 5.5rem;
+  right: 2rem;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+
+  a {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    text-decoration: none;
+    padding: 0.5rem;
+
+    &:hover {
+      color: #60a5fa;
+    }
+  }
+}
