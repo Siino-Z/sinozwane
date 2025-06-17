@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import '../styles/SkillsConstellation.scss';
 
 interface Skill {
   name: string;
