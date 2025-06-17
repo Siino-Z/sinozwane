@@ -21,7 +21,7 @@
 
 I'm a frontend craftsman with a secret weapon: a deep data science background. While I can optimize ML models and wrangle complex datasets, my true obsession lies in translating data into stunning, smooth web experiences that users absolutely love. I believe the intersection of data intelligence and beautiful UI is where magic happens.
 
-- 🎨 **Frontend Obsessed**: Crafting pixel-perfect, buttery-smooth web experiences at [siino-z.github.io](https://siino-z.github.io/)
+- 🎨 **Frontend Obsessed**: Crafting pixel-perfect, buttery-smooth web experiences
 - 📊 **Data-Driven Designer**: Leveraging analytics and ML insights to create smarter UIs
 - 🧠 **Python by night, React by day**: Deep in ML models, but dreaming of beautiful interfaces
 - 💫 **Micro-interaction enthusiast**: Believing that great UX lives in the details
