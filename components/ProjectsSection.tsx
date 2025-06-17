@@ -14,7 +14,7 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'Data Scince Portfolio Website',
+    title: 'Data Science Portfolio Website',
     description: 'A fully responsive personal portfolio using a Bootstrap template; integrated interactive sections and custom JavaScript features.',
     link: 'https://siino-z.github.io/',
     image: '/img/ds1.svg',
